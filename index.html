@@ -345,7 +345,7 @@ footer a{text-decoration:underline}
     <details><summary>אפשר לשלוח תמונה במקום להסביר?</summary><p>כן, וזה הכי מהיר. צלמו את המקום או החלק, הוסיפו מידות בערך, ותקבלו תשובה עניינית.</p></details>
     <details><summary>עובדים גם עם נירוסטה ואלומיניום?</summary><p>כן. פלדה, נירוסטה ואלומיניום, לפי מה שמתאים לעבודה, לסביבה ולתקציב.</p></details>
     <details><summary>למה צריך לתאם מראש?</summary><p>הבעלים משרת במילואים, אז הלו״ז בסדנה משתנה. כשמתאמים מראש, מקבלים תאריך ברור ועומדים בו.</p></details>
-    <details><summary>איפה הסדנה?</summary><p>באזור התעשייה בני יהודה, ברמת הגולן. <a href="https://waze.com/ul?q=%D7%90%D7%96%D7%95%D7%A8%20%D7%94%D7%AA%D7%A2%D7%A9%D7%99%D7%99%D7%94%20%D7%91%D7%A0%D7%99%20%D7%99%D7%94%D7%95%D7%93%D7%94" target="_blank" rel="noopener" style="color:var(--or);font-weight:700">ניווט ב־Waze</a></p></details>
+    <details><summary>איפה הסדנה?</summary><p>באזור התעשייה בני יהודה, ברמת הגולן. <a data-waze href="https://waze.com/ul?q=%D7%90%D7%96%D7%95%D7%A8%20%D7%94%D7%AA%D7%A2%D7%A9%D7%99%D7%99%D7%94%20%D7%91%D7%A0%D7%99%20%D7%99%D7%94%D7%95%D7%93%D7%94&navigate=yes" target="_blank" rel="noopener" style="color:var(--or);font-weight:700">ניווט ב־Waze</a> או <a href="https://www.google.com/maps/search/?api=1&query=%D7%90%D7%96%D7%95%D7%A8%20%D7%94%D7%AA%D7%A2%D7%A9%D7%99%D7%99%D7%94%20%D7%91%D7%A0%D7%99%20%D7%99%D7%94%D7%95%D7%93%D7%94" target="_blank" rel="noopener" style="color:var(--or);font-weight:700">בגוגל מפות</a></p></details>
   </div>
 </div></section>
 
@@ -432,6 +432,19 @@ if (!reduce) {
   const ro = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.remove('pre'); ro.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
   $$('.rise').forEach((el, i) => { if (el.getBoundingClientRect().top > innerHeight) { el.classList.add('pre'); el.style.transitionDelay = (i % 3) * 70 + 'ms'; ro.observe(el); } });
 }
+
+/* Waze: on phones open the installed app through its own scheme; only if the app didn't take over, fall back to the web link */
+$('[data-waze]').forEach(a => a.addEventListener('click', e => {
+  if (!/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) return;
+  e.preventDefault();
+  const web = a.href, app = 'waze://' + web.slice(web.indexOf('?'));
+  let left = false;
+  const onHide = () => { left = true; };
+  document.addEventListener('visibilitychange', onHide, { once: true });
+  addEventListener('pagehide', onHide, { once: true });
+  location.href = app;
+  setTimeout(() => { if (!left && !document.hidden) location.href = web; }, 1600);
+}));
 
 /* lead form → WhatsApp message to the owner (nothing is stored on a server) */
 $('#leadForm').addEventListener('submit', e => {
