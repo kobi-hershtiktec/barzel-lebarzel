@@ -1,0 +1,10 @@
+raw/
+dist/
+preview/
+concept-*.html
+index-dark.html
+index-site-v1.html
+build-artifact.cjs
+media/smithy*
+media/sparks*
+media/toolwall*
