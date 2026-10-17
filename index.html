@@ -62,11 +62,13 @@ header .w{display:flex;justify-content:space-between;align-items:center;height:8
 .top-tel svg{width:18px;height:18px}
 
 /* hero: text + call to action beside full-height footage */
-.hero{position:relative;display:grid;grid-template-columns:minmax(0,780px);min-height:100vh;min-height:100svh;overflow:hidden}
-.hero .txt{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:center;padding:120px var(--g) 64px}
+.hero{position:relative;display:grid;grid-template-columns:minmax(0,1120px);justify-content:center;text-align:center;min-height:100vh;min-height:100svh;overflow:hidden}
+.hero .txt{position:relative;z-index:1;align-items:center;display:flex;flex-direction:column;justify-content:center;padding:120px var(--g) 64px}
 .hero h1{font-size:clamp(38px,4.6vw,70px)}
-.hero h1 span{color:var(--or)}
-.hero .lead{margin:20px 0 22px}
+.hero h1 span{color:var(--or);display:block;text-wrap:balance}
+.hero .lead{margin:20px auto 22px}
+.hero .ticks{justify-items:center}
+.hero .ctas{justify-content:center}
 .ticks{list-style:none;display:grid;gap:8px;margin-bottom:30px}
 .ticks li{display:flex;gap:10px;align-items:flex-start;font-weight:500}
 .ticks svg{width:22px;height:22px;flex:none;color:var(--or-bright);margin-top:3px}
@@ -74,7 +76,7 @@ header .w{display:flex;justify-content:space-between;align-items:center;height:8
 .micro{margin-top:14px;font-size:14px;color:var(--mute)}
 .hero .vid{position:absolute;inset:0;z-index:0;background:#d9d3c9}
 /* the footage sits under a light veil: it moves, but never competes with the text */
-.hero .vid::after{content:"";position:absolute;inset:0;background:linear-gradient(270deg,rgba(250,249,246,.88) 0%,rgba(250,249,246,.72) 45%,rgba(250,249,246,.5) 100%)}
+.hero .vid::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(250,249,246,.85),rgba(250,249,246,0) 16%),radial-gradient(ellipse 62% 70% at 50% 50%,rgba(250,249,246,.86) 0%,rgba(250,249,246,.7) 55%,rgba(250,249,246,.48) 100%)}
 .hero .vid img,.hero .vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .hero .vid img,.hero .vid video{filter:saturate(.9)}
 .hero .vid video{opacity:0;transition:opacity 1s}.hero .vid video.on{opacity:1}
@@ -245,7 +247,7 @@ footer a{text-decoration:underline}
 <section class="hero" id="top">
   <div class="txt">
     <span class="ey">מסגרייה ומכניקה הנדסית · א.ת. בני יהודה</span>
-    <h1>צריכים עבודת מתכת שתחזיק שנים? <span>שלחו תמונה, קבלו הצעת מחיר.</span></h1>
+    <h1>צריכים עבודת מתכת שתחזיק שנים?<br><span>שלחו תמונה, קבלו הצעת מחיר.</span></h1>
     <p class="lead">פתרונות מתכת לחקלאות, לתעשייה ולרכב, מהתכנון ועד ההתקנה בשטח. עובדים ישירות מול בעל המקצוע.</p>
     <ul class="ticks">
       <li><svg><use href="#i-check"/></svg>פלדה, נירוסטה ואלומיניום, לפי מה שהעבודה דורשת</li>
